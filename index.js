@@ -12,22 +12,25 @@ tasks.forEach(task => {
   taskListUL.appendChild(LI) // into UL
 })
 
-// GET TASK INPUT VALUE
-const newTask = document.getElementById('input-text').value
+const submitText = event => {
+  event.preventDefault()
 
-if (newTask !== '') {
-  // CREATE THE NEW TASK LIST
-  const LI = document.createElement('li')
-  // <li></li>
-  const text = document.createTextNode(newTask)
-  // New task text
-  LI.appendChild(text)
-  // <li>New task text</li>
-  taskListUL.appendChild(LI)
-  // <ul>
-  //   <li>New task text</li>
-  // </ul>
+  const newTask = document.getElementById('input-text').value
 
-  // SET INPUT TEXT TO EMPTY AGAIN
-  document.getElementById('input-text').value = ''
+  if (newTask !== '') {
+    // CREATE THE NEW TASK LIST
+    const LI = document.createElement('li')
+    // <li></li>
+    const text = document.createTextNode(newTask)
+    // New task text
+    LI.appendChild(text)
+    // <li>New task text</li>
+    taskListUL.appendChild(LI)
+    // <ul>
+    //   <li>New task text</li>
+    // </ul>
+
+    // SET INPUT TEXT TO EMPTY AGAIN
+    document.getElementById('input-text').value = ''
+  }
 }
