@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Learn DOM</title>
+  </head>
+  <body>
+    <div>
+      <h1 id="title">MyTasks</h1>
+
+      <form id="form" onsubmit="MyTasks.submit(event)">
+        <input id="input-text" type="text" placeholder="What to do?" />
+        <input id="button-add" type="submit" value="Add" />
+      </form>
+
+      <ul id="task-list">
+        <!-- TASK LIST -->
+      </ul>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
