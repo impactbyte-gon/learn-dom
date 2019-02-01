@@ -1,0 +1,1 @@
+const school = 'Impact Byte'
