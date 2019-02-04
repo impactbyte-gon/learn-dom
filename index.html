@@ -8,12 +8,17 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
+    <form id="search-form" onsubmit="App.search()">
+      <input id="search-text" type="text" placeholder="Search here..." />
+      <input id="search-button" type="submit" value="Search" />
+    </form>
+
     <div id="container">
       <h1 id="title">MyTasks</h1>
 
-      <form id="add" onsubmit="App.add()">
-        <input id="input-text" type="text" placeholder="What to do?" />
-        <input id="button-add" type="submit" value="Add" />
+      <form id="add-form" onsubmit="App.add()">
+        <input id="add-text" type="text" placeholder="What to do?" />
+        <input id="add-button" type="submit" value="Add" />
       </form>
 
       <ul id="task-list">

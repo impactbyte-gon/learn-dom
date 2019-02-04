@@ -22,6 +22,16 @@ const App = {
       id: 3,
       text: 'Flying an Airplane',
       completed: false
+    },
+    {
+      id: 4,
+      text: 'Building a house',
+      completed: false
+    },
+    {
+      id: 5,
+      text: 'Drawing a mountain',
+      completed: false
     }
   ],
 
@@ -33,7 +43,9 @@ const App = {
     data.forEach(item => {
       const li = document.createElement('li')
 
-      li.innerHTML = `<span>${item.text}</span>
+      li.innerHTML = `<span ${
+        item.completed ? 'class="completed"' : ''
+      } onclick="App.toggleCompleted(${item.id})">${item.text}</span>
       <button onclick="App.edit(${item.id})">✎ EDIT</button>
       <button onclick="App.remove(${item.id})">✖ REMOVE</button>`
 
@@ -45,12 +57,12 @@ const App = {
   // SUBMIT NEW DATA
   add: () => {
     event.preventDefault()
-    const newTask = document.getElementById('input-text').value // string value
+    const newTask = document.getElementById('add-text').value // string value
 
     if (newTask !== '') {
       App.data.push(newTask)
       App.display()
-      document.getElementById('input-text').value = ''
+      document.getElementById('add-text').value = ''
     }
   },
 
@@ -83,13 +95,42 @@ const App = {
   },
 
   // ---------------------------------------------------------------------------
-  // SEARCH TASK BY KEYWORD
-  search: keyword => {
+  // SEARCH TASK AFTER SUBMIT
+  search: () => {
+    event.preventDefault()
+    const keyword = document.getElementById('search-text').value
+
     const foundTasks = App.data.filter(item => {
       return item.text.toLowerCase().includes(keyword.toLowerCase())
     })
 
     App.display(foundTasks)
+  },
+
+  // ---------------------------------------------------------------------------
+  // SEARCH TASK AUTOMATICALLY
+  searchAuto: () => {
+    const keyword = document.getElementById('search-text').value
+
+    const foundTasks = App.data.filter(item => {
+      return item.text.toLowerCase().includes(keyword.toLowerCase())
+    })
+
+    App.display(foundTasks)
+  },
+
+  // ---------------------------------------------------------------------------
+  // TOGGLE TASK COMPLETED
+  toggleCompleted: id => {
+    const modifiedTasks = App.data.map(item => {
+      if (item.id === id) {
+        item.completed = !item.completed
+      }
+      return item
+    })
+
+    App.data = modifiedTasks
+    App.display()
   }
 }
 
