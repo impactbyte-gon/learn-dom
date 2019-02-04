@@ -7,6 +7,7 @@ const taskListDOM = document.getElementById('task-list')
 const App = {
   // ---------------------------------------------------------------------------
   // DATA
+  nextId: 6,
   data: [
     {
       id: 1,
@@ -57,12 +58,17 @@ const App = {
   // SUBMIT NEW DATA
   add: () => {
     event.preventDefault()
-    const newTask = document.getElementById('add-text').value // string value
+    const newTask = {
+      id: nextId,
+      text: document.getElementById('add-text').value,
+      completed: false
+    }
 
     if (newTask !== '') {
       App.data.push(newTask)
       App.display()
       document.getElementById('add-text').value = ''
+      nextId++
     }
   },
 
