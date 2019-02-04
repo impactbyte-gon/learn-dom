@@ -59,7 +59,7 @@ const App = {
   add: () => {
     event.preventDefault()
     const newTask = {
-      id: nextId,
+      id: App.nextId,
       text: document.getElementById('add-text').value,
       completed: false
     }
@@ -68,7 +68,7 @@ const App = {
       App.data.push(newTask)
       App.display()
       document.getElementById('add-text').value = ''
-      nextId++
+      App.nextId++
     }
   },
 
