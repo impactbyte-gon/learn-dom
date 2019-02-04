@@ -6,11 +6,11 @@ const taskListDOM = document.getElementById('task-list')
 // STORAGE
 const Storage = {
   set: value => {
-    if (value !== null) sessionStorage.setItem('tasks', JSON.stringify(value))
+    if (value !== null) localStorage.setItem('tasks', JSON.stringify(value))
   },
 
   get: () => {
-    const data = JSON.parse(sessionStorage.getItem('tasks'))
+    const data = JSON.parse(localStorage.getItem('tasks'))
     if (data !== null) return data
     else return []
   }
