@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>MyTasks | Learn DOM</title>
+    <title>Learn DOM</title>
   </head>
   <body>
-    <div id="container">
+    <div>
       <h1 id="title">MyTasks</h1>
 
-      <form id="add" onsubmit="App.add()">
+      <form id="form" onsubmit="submitText(event)">
         <input id="input-text" type="text" placeholder="What to do?" />
         <input id="button-add" type="submit" value="Add" />
       </form>

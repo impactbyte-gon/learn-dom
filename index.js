@@ -1,36 +1,79 @@
-// GET TASK LIST
-const taskListUL = document.getElementById('task-list')
+// ---------------------------------------------------------------------------
+// ELEMENTS
+const taskListDOM = document.getElementById('task-list')
 
-// TASKS DATA
-let tasks = ['Learning JavaScript', 'Drinking coffee', 'Running a marathon']
+// ---------------------------------------------------------------------------
+// PROGRAM
+const App = {
+  // ---------------------------------------------------------------------------
+  // DATA
+  data: [
+    {
+      id: 1,
+      text: 'Learning JavaScript',
+      completed: true
+    },
+    {
+      id: 2,
+      text: 'Running a Hackathon',
+      completed: false
+    },
+    {
+      id: 3,
+      text: 'Flying an Airplane',
+      completed: false
+    }
+  ],
 
-// PUT ALL DATA INTO DOM
-tasks.forEach(task => {
-  const LI = document.createElement('li')
-  const text = document.createTextNode(task)
-  LI.appendChild(text) // into LI
-  taskListUL.appendChild(LI) // into UL
-})
+  // ---------------------------------------------------------------------------
+  // DISPLAY DATA
+  display: (data = App.data) => {
+    taskListDOM.innerHTML = ''
 
-const submitText = event => {
-  event.preventDefault()
+    data.forEach(item => {
+      const li = document.createElement('li')
 
-  const newTask = document.getElementById('input-text').value
+      li.innerHTML = `<span>${item.text}</span>
+        <button onclick="App.remove(${item.id})">X</button>`
+      taskListDOM.appendChild(li)
+    })
+  },
 
-  if (newTask !== '') {
-    // CREATE THE NEW TASK LIST
-    const LI = document.createElement('li')
-    // <li></li>
-    const text = document.createTextNode(newTask)
-    // New task text
-    LI.appendChild(text)
-    // <li>New task text</li>
-    taskListUL.appendChild(LI)
-    // <ul>
-    //   <li>New task text</li>
-    // </ul>
+  // ---------------------------------------------------------------------------
+  // SUBMIT NEW DATA
+  add: () => {
+    event.preventDefault()
+    const newTask = document.getElementById('input-text').value // string value
 
-    // SET INPUT TEXT TO EMPTY AGAIN
-    document.getElementById('input-text').value = ''
+    if (newTask !== '') {
+      App.data.push(newTask)
+      App.display()
+      document.getElementById('input-text').value = ''
+    }
+  },
+
+  // ---------------------------------------------------------------------------
+  // REMOVE TASK BY ID
+  remove: id => {
+    const modifiedTasks = App.data.filter(item => {
+      return item.id !== id
+    })
+
+    App.data = modifiedTasks
+    App.display()
+  },
+
+  // ---------------------------------------------------------------------------
+  // SEARCH TASK BY KEYWORD
+  search: keyword => {
+    const foundTasks = App.data.filter(item => {
+      return item.text.toLowerCase().includes(keyword.toLowerCase())
+    })
+
+    App.display(foundTasks)
   }
 }
+
+// ---------------------------------------------------------------------------
+// RUN
+App.display()
