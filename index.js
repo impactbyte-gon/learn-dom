@@ -6,11 +6,11 @@ const taskListDOM = document.getElementById('task-list')
 // STORAGE
 const Storage = {
   set: value => {
-    if (value !== null) localStorage.setItem('tasks', JSON.stringify(value))
+    if (value !== null) sessionStorage.setItem('tasks', JSON.stringify(value))
   },
 
   get: () => {
-    const data = JSON.parse(localStorage.getItem('tasks'))
+    const data = JSON.parse(sessionStorage.getItem('tasks'))
     if (data !== null) return data
     else return []
   }
@@ -45,7 +45,7 @@ const App = {
 
   // ---------------------------------------------------------------------------
   // SUBMIT NEW DATA
-  add: () => {
+  add: event => {
     event.preventDefault()
     const newTask = {
       id: App.nextId,
@@ -98,7 +98,7 @@ const App = {
 
   // ---------------------------------------------------------------------------
   // SEARCH TASK AFTER SUBMIT
-  search: () => {
+  search: event => {
     event.preventDefault()
     const keyword = document.getElementById('search-text').value
 
