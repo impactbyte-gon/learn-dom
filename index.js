@@ -34,7 +34,9 @@ const App = {
       const li = document.createElement('li')
 
       li.innerHTML = `<span>${item.text}</span>
-        <button onclick="App.remove(${item.id})">X</button>`
+      <button onclick="App.edit(${item.id})">✎ EDIT</button>
+      <button onclick="App.remove(${item.id})">✖ REMOVE</button>`
+
       taskListDOM.appendChild(li)
     })
   },
@@ -61,6 +63,23 @@ const App = {
 
     App.data = modifiedTasks
     App.display()
+  },
+
+  // ---------------------------------------------------------------------------
+  edit: id => {
+    const textInput = prompt('Edit task to...')
+
+    if (textInput !== null) {
+      const modifiedTasks = App.data.map(item => {
+        if (item.id === id) {
+          item.text = textInput
+        }
+        return item
+      })
+
+      App.data = modifiedTasks
+      App.display()
+    }
   },
 
   // ---------------------------------------------------------------------------
