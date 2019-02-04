@@ -3,41 +3,30 @@
 const taskListDOM = document.getElementById('task-list')
 
 // ---------------------------------------------------------------------------
+// STORAGE
+const Storage = {
+  set: value => {
+    if (value !== null) localStorage.setItem('tasks', JSON.stringify(value))
+  },
+
+  get: () => {
+    const data = JSON.parse(localStorage.getItem('tasks'))
+    if (data !== null) return data
+    else return []
+  }
+}
+
+// ---------------------------------------------------------------------------
 // PROGRAM
 const App = {
   // ---------------------------------------------------------------------------
   // DATA
-  nextId: 6,
-  data: [
-    {
-      id: 1,
-      text: 'Learning JavaScript',
-      completed: true
-    },
-    {
-      id: 2,
-      text: 'Running a Hackathon',
-      completed: false
-    },
-    {
-      id: 3,
-      text: 'Flying an Airplane',
-      completed: false
-    },
-    {
-      id: 4,
-      text: 'Building a house',
-      completed: false
-    },
-    {
-      id: 5,
-      text: 'Drawing a mountain',
-      completed: false
-    }
-  ],
+  nextId: 1, // App.nextId
+  data: Storage.get(), // App.data
 
   // ---------------------------------------------------------------------------
   // DISPLAY DATA
+  // App.display()
   display: (data = App.data) => {
     taskListDOM.innerHTML = ''
 
@@ -65,7 +54,11 @@ const App = {
     }
 
     if (newTask !== '') {
+      // Push new data
       App.data.push(newTask)
+      // Set new data into localStorage
+      Storage.set(App.data)
+
       App.display()
       document.getElementById('add-text').value = ''
       App.nextId++
