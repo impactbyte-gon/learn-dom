@@ -73,6 +73,7 @@ const App = {
     })
 
     App.data = modifiedTasks
+    Storage.set(App.data)
     App.display()
   },
 
@@ -90,6 +91,7 @@ const App = {
       })
 
       App.data = modifiedTasks
+      Storage.set(App.data)
       App.display()
     }
   },
@@ -130,6 +132,7 @@ const App = {
     })
 
     App.data = modifiedTasks
+    Storage.set(App.data)
     App.display()
   }
 }
